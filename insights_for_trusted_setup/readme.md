@@ -173,46 +173,51 @@ If \( h_2' = s \), the proof is valid.
 
 ---
 
-$$
-\left| 
-\begin{array}{ll}
-A &_{\text{public} := Q = k \cdot G} \\
-\mid &_{\text{private} := k} \\
-\mid & r \\
-\mid & m \\
-\end{array}
-\right|
+![equations](equations.png)
 
-\quad
-\left| 
-\begin{array}{ll}
-\mid & \\
-\mid & \\
-\mid & \\
-\mid & H_m = (H_x, H_y) \\
-\end{array}
-\right|
-
-\\\\
-\alpha := \text{VRF} = k \cdot H_m
-
-\\\\
-s = H(G,\ H_m,\ Q,\ \alpha,\ r \cdot G,\ r \cdot H_m)
-\quad\mid\quad \beta := r \cdot G;\quad \gamma := r \cdot H_m
-\\\\
-t = r - s \cdot k \mod N
-\\\\
-\textbf{proof} := (s,\ t,\ \alpha)
-\\\\
-\textbf{Verify:}
-\\\\
-s \overset{?}{=} h' = H(G,\ H_m,\ Q,\ \alpha,\ \beta,\ \gamma)
-\\\\
-\beta \overset{?}{=} t \cdot G + s \cdot Q
-\\\\
-\gamma \overset{?}{=} t \cdot H_m + s \cdot \alpha
+```
 $$
 
+ \left | \begin{vmatrix}
+ A  &_{public:= Q = k.G}   \\
+ |-  &_{private:= k}  \\
+ |-  &r  \\
+ |-  &m  \\
+\end{vmatrix}
+\right |  
+
+\  
+ \left | \begin{vmatrix}
+ |-  &   \\
+ |-  &  \\
+ |-  &  \\
+ |-  &H_m = {H_x, H_y}  \\
+\end{vmatrix}
+\right |  
+
+\\ \\
+\alpha := VRF = k.H_m
+
+\\
+s = H_{G, \ H_m, \ Q, \ \alpha, \ r.G, \ r.H}
+\ | \ \beta := r.G; \gamma := r.H
+\\
+t= r - s.k \mod N
+\\
+\textbf{proof := s,t,} \alpha
+\\
+\\
+\textbf{Verify: }
+\\ \ s = h'
+\\ \ = H_{G, \ H_m, \ Q, \ \alpha, \ \beta, \ \gamma}
+\\
+\\
+\beta = t.G + s.Q  
+\\
+\gamma = t.H + s.\alpha
+
+$$
+```
 
 ---
 
