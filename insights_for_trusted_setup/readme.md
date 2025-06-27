@@ -173,7 +173,7 @@ If \( h_2' = s \), the proof is valid.
 
 ---
 
-$$\
+$$
 
  \left | \begin{vmatrix}
  A  &_{public:= Q = k.G}   \\
@@ -213,7 +213,7 @@ t= r - s.k \mod N
 \\
 \gamma = t.H + s.\alpha
 
-\$$
+$$
 
 ---
 
