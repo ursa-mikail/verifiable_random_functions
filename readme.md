@@ -2,6 +2,94 @@
 
 This document outlines how **Verifiable Random Functions (VRFs)** can be used to generate **deterministic, verifiable, and fair randomness**, especially in applications like leader election in distributed systems or blockchains.
 
+VRF: used to sign random, and send to a PRF that is also signed - ensure no single person has control; ensure no single seed is excluded (e.g. using Shamir sharing threshold, etc). 
+
+The ID can be proven by H(x, time_stamp_secure, h(key_private),  key_private).
+
+---
+
+## VRF Methodology for Verifiable Randomness and Leader Selection
+This methodology outlines the generation and verification of deterministic, verifiable randomness using a cryptographic VRF construction, ensuring fairness, unpredictability, and resistance to manipulation in distributed systems (e.g., consensus, lottery, leader election).
+
+1. Randomness Generation
+2 main approaches for randomness generation:
+
+A. Pseudorandom Number Generator (PRNG)
+
+```
+PRNG(seed || key) → number_random_00, proof
+```
+- Produces an initial random number with a verifiable output.
+- proof can be a hash or deterministic transformation tied to the seed and key.
+
+A PRNG alone doesn't provide verifiability. Only the VRF part is truly "verifiable randomness".
+
+B. VRF-Based Randomness
+```
+VRF(seed || key, key_secret) → value_random_01, proof
+```
+- A secret key is used to generate a unique, verifiable random value and proof.
+- Ensures that randomness is unique and tamper-evident.
+
+2. Signature-Based Randomness
+To ensure uniqueness and reduce collision risk:
+
+```
+sign(seed, key_secret) → signature
+hash(signature) → number_random
+verify(signature, key_public, seed) → True/False
+```
+
+- BLS Signatures are preferred for uniqueness guarantees.
+- Signature verification ensures the integrity of the source randomness.
+
+BLS signatures are a good choice because they are:
+- Unique (reducing collision risk)
+- Aggregateable (useful in distributed protocols)
+
+
+3. Verifiability
+To verify the random output:
+
+```
+verify_VRF(value_random, key_public, proof, seed) → True/False
+```
+or
+
+```
+verify(signature, key_public, seed) → True/False
+```
+
+Ensures that outputs were indeed derived from the claimed seed/key pair.
+
+4. Application: Leader Selection via Bernoulli Sampling
+
+```
+VRF(seed || round || steps, key_secret) → value_random_output_VRF, proof
+```
+Output is bounded:
+
+```
+value_random_output_VRF < x
+```
+
+Apply a hash to this VRF output for deterministic bucketing:
+
+```
+hash(value_random_output_VRF) → bucket_index ∈ [0, w)
+```
+
+Binomial trial model:
+- B(k,w,p) with:
+	- w: number of trials (tickets)
+	- p: probability of winning
+	- k: winning tickets
+	- j: selected winners based on bucket index
+
+Bernoulli trial: 1 trial per participant, you are sampling B(1, p).
+
+✅ VRFs use a secret key to produce a random output and proof, which can be verified using the public key.
+
 ---
 
 ## 🔄 Overview
