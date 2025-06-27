@@ -174,24 +174,43 @@ If \( h_2' = s \), the proof is valid.
 ---
 
 $$
-\begin{aligned}
-&\textbf{Given:} \\
-&A_{\text{public}} := Q = k \cdot G \\
-&A_{\text{private}} := k \\
-&\text{Random nonce: } r \\
-&\text{Message: } m \\
-&\text{Hashed message point: } H_m = (H_x, H_y) \\ \\
-&\alpha := \text{VRF output} = k \cdot H_m \\ \\
-&s := H(G, H_m, Q, \alpha, r \cdot G, r \cdot H_m) \\
-&\quad \text{Let } \beta := r \cdot G,\quad \gamma := r \cdot H_m \\
-&t := r - s \cdot k \mod N \\ \\
-&\textbf{Proof: } (s, t, \alpha) \\ \\
-&\textbf{Verification:} \\
-&\beta' := t \cdot G + s \cdot Q \\
-&\gamma' := t \cdot H_m + s \cdot \alpha \\
-&s' := H(G, H_m, Q, \alpha, \beta', \gamma') \\
-&\text{Accept if } s' = s
-\end{aligned}
+\left| 
+\begin{array}{ll}
+A &_{\text{public} := Q = k \cdot G} \\
+\mid &_{\text{private} := k} \\
+\mid & r \\
+\mid & m \\
+\end{array}
+\right|
+
+\quad
+\left| 
+\begin{array}{ll}
+\mid & \\
+\mid & \\
+\mid & \\
+\mid & H_m = (H_x, H_y) \\
+\end{array}
+\right|
+
+\\\\
+\alpha := \text{VRF} = k \cdot H_m
+
+\\\\
+s = H(G,\ H_m,\ Q,\ \alpha,\ r \cdot G,\ r \cdot H_m)
+\quad\mid\quad \beta := r \cdot G;\quad \gamma := r \cdot H_m
+\\\\
+t = r - s \cdot k \mod N
+\\\\
+\textbf{proof} := (s,\ t,\ \alpha)
+\\\\
+\textbf{Verify:}
+\\\\
+s \overset{?}{=} h' = H(G,\ H_m,\ Q,\ \alpha,\ \beta,\ \gamma)
+\\\\
+\beta \overset{?}{=} t \cdot G + s \cdot Q
+\\\\
+\gamma \overset{?}{=} t \cdot H_m + s \cdot \alpha
 $$
 
 
