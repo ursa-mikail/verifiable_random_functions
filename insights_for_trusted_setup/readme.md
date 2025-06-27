@@ -174,46 +174,61 @@ If \( h_2' = s \), the proof is valid.
 ---
 
 $$
-
- \left | \begin{vmatrix}
- A  &_{public:= Q = k.G}   \\
- |-  &_{private:= k}  \\
- |-  &r  \\
- |-  &m  \\
+\left| 
+\begin{vmatrix}
+A &_{\text{public} := Q = k \cdot G} \\
+\mid &_{\text{private} := k} \\
+\mid & r \\
+\mid & m \\
 \end{vmatrix}
-\right |  
+\right|
 
-\  
- \left | \begin{vmatrix}
- |-  &   \\
- |-  &  \\
- |-  &  \\
- |-  &H_m = {H_x, H_y}  \\
+\quad
+\left| 
+\begin{vmatrix}
+\mid & \\
+\mid & \\
+\mid & \\
+\mid & H_m = (H_x, H_y) \\
 \end{vmatrix}
-\right |  
+\right|
 
-\\ \\
-\alpha := VRF = k.H_m
+\\\\
 
-\\
-s = H_{G, \ H_m, \ Q, \ \alpha, \ r.G, \ r.H}
-\ | \ \beta := r.G; \gamma := r.H
-\\
-t= r - s.k \mod N
-\\
-\textbf{proof := s,t,} \alpha
-\\
-\\
-\textbf{Verify: }
-\\ \ s = h'
-\\ \ = H_{G, \ H_m, \ Q, \ \alpha, \ \beta, \ \gamma}
-\\
-\\
-\beta = t.G + s.Q  
-\\
-\gamma = t.H + s.\alpha
+\alpha := \text{VRF} = k \cdot H_m
+
+\\\\
+
+s = H(G, H_m, Q, \alpha, r \cdot G, r \cdot H)  
+\quad\text{where } 
+\beta := r \cdot G,\ \gamma := r \cdot H
+
+\\\\
+
+t = r - s \cdot k \mod N
+
+\\\\
+
+\textbf{proof} := (s, t, \alpha)
+
+\\\\
+
+\textbf{Verify:}
+
+\\\\
+
+s \overset{?}{=} H'(G, H_m, Q, \alpha, \beta, \gamma)
+
+\\\\
+
+\beta \overset{?}{=} t \cdot G + s \cdot Q
+
+\\\\
+
+\gamma \overset{?}{=} t \cdot H + s \cdot \alpha
 
 $$
+
 
 ---
 
